@@ -150,7 +150,7 @@ public class Program
 					if (!success)
 						process.Kill ();
 
-					Console.Out.Write ("\t\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.Elapsed.ToString () : "timeout!");
+					Console.Out.WriteLine ("\t\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.Elapsed.ToString () : "timeout!");
 
 					profile.Runs [i] = new ProfileResult.Run {
 						Index = i,
