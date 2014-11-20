@@ -98,7 +98,7 @@ public class Program
 				var info = new ProcessStartInfo {
 					FileName = Path.Combine (revisionfolder, "mono"),
 					WorkingDirectory = Path.Combine (testsdir,benchmark. TestDirectory),
-//					UseShellExecute = false,
+					UseShellExecute = false,
 //					RedirectStandardOutput = true,
 //					RedirectStandardError = true,
 				};
