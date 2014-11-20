@@ -134,8 +134,8 @@ public class Program
 
 					var process = Process.Start (info);
 
-					Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t"), TaskCreationOptions.LongRunning);
-					Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t"), TaskCreationOptions.LongRunning);
+					Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t\t"), TaskCreationOptions.LongRunning);
+					Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t\t"), TaskCreationOptions.LongRunning);
 
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
