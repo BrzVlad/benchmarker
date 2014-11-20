@@ -120,8 +120,6 @@ public class Program
 
 				var profile = new ProfileResult { DateTime = DateTime.Now, Benchmark = benchmark, Config = config, Revision = revision, Timedout = timedout, Runs = new ProfileResult.Run [config.Count] };
 
-				Action<;
-
 				for (var i = 0; i < config.Count; ++i) {
 					var profilefilename = String.Join ("_", new string [] { profile.ToString (), i.ToString () }) + ".mlpd";
 
