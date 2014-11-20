@@ -134,8 +134,8 @@ public class Program
 
 					var process = Process.Start (info);
 
-					Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t\t"), TaskCreationOptions.LongRunning);
-					Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t\t"), TaskCreationOptions.LongRunning);
+					var stdout = Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t\t"), TaskCreationOptions.LongRunning);
+					var stderr = Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t\t"), TaskCreationOptions.LongRunning);
 
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
@@ -143,6 +143,9 @@ public class Program
 
 					if (!success)
 						process.Kill ();
+
+					stdout.Wait ();
+					stderr.Wait ();
 
 					Console.Out.WriteLine ("\t\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.Elapsed.ToString () : "timeout!");
 
