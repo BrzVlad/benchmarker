@@ -99,8 +99,8 @@ public class Program
 					FileName = Path.Combine (revisionfolder, "mono"),
 					WorkingDirectory = Path.Combine (testsdir,benchmark. TestDirectory),
 					UseShellExecute = false,
-//					RedirectStandardOutput = true,
-//					RedirectStandardError = true,
+					RedirectStandardOutput = true,
+					RedirectStandardError = true,
 				};
 
 				foreach (var env in config.MonoEnvironmentVariables) {
@@ -120,6 +120,12 @@ public class Program
 
 				var profile = new ProfileResult { DateTime = DateTime.Now, Benchmark = benchmark, Config = config, Revision = revision, Timedout = timedout, Runs = new ProfileResult.Run [config.Count] };
 
+				Action<TextReader, TextWriter, string> redirect = (reader, writer, prefix) => {
+					string line;
+					while ((line = reader.ReadLine ()) != null)
+						writer.WriteLine (prefix + line);
+				};
+
 				for (var i = 0; i < config.Count; ++i) {
 					var profilefilename = String.Join ("_", new string [] { profile.ToString (), i.ToString () }) + ".mlpd";
 
@@ -127,15 +133,16 @@ public class Program
 						profilesfolder, profilefilename)) + arguments;
 
 					Console.Out.WriteLine ("\t$> {0} {1} {2}", envvar, info.FileName, info.Arguments);
-					Console.Out.Write ("\t\t-> {0} ", String.Format ("({0}/{1})", i + 1, config.Count));
 
 					timeout = benchmark.Timeout > 0 ? benchmark.Timeout : timeout;
 
 					var sw = Stopwatch.StartNew ();
 
 					var process = Process.Start (info);
-//					var stdout = Task.Factory.StartNew (() => new StreamReader (process.StandardOutput.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
-//					var stderr = Task.Factory.StartNew (() => new StreamReader (process.StandardError.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
+
+					Task.Factory.StartNew (() => redirect (process.StandardOutput, Console.Out, "\t"), TaskCreationOptions.LongRunning);
+					Task.Factory.StartNew (() => redirect (process.StandardError, Console.Error, "\t"), TaskCreationOptions.LongRunning);
+
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
 					sw.Stop ();
@@ -143,7 +150,7 @@ public class Program
 					if (!success)
 						process.Kill ();
 
-					Console.Out.WriteLine (success ? sw.ElapsedMilliseconds.ToString () + "ms" : "timeout!");
+					Console.Out.Write ("\t\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.ToString () : "timeout!");
 
 					profile.Runs [i] = new ProfileResult.Run {
 						Index = i,
