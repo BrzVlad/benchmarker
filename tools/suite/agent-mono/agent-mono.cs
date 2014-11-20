@@ -148,8 +148,8 @@ public class Program
 					profile.Runs [i] = new ProfileResult.Run {
 						Index = i,
 						WallClockTime = success ? TimeSpan.FromTicks (sw.ElapsedTicks) : TimeSpan.Zero,
-						Output = success ? stdout.Result : null,
-						Error = success ? stderr.Result : null,
+//						Output = success ? stdout.Result : null,
+//						Error = success ? stderr.Result : null,
 						ProfilerOutput = profilefilename
 					};
 
