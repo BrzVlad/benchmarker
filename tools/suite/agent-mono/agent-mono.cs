@@ -51,7 +51,7 @@ public class Program
 			} else if (args [optindex] == "--sshkey") {
 				sshkey = args [++optindex];
 			} else if (args [optindex] == "-u" || args [optindex] == "--upload") {
-				upload = Boolean.Parse (args [++optindex]);
+				upload = true;
 			} else if (args [optindex].StartsWith ("--help")) {
 				UsageAndExit ();
 			} else if (args [optindex] == "--") {
@@ -120,11 +120,7 @@ public class Program
 
 				var profile = new ProfileResult { DateTime = DateTime.Now, Benchmark = benchmark, Config = config, Revision = revision, Timedout = timedout, Runs = new ProfileResult.Run [config.Count] };
 
-				Action<TextReader, TextWriter, string> redirect = (reader, writer, prefix) => {
-					string line;
-					while ((line = reader.ReadLine ()) != null)
-						writer.WriteLine (prefix + line);
-				};
+				Action<;
 
 				for (var i = 0; i < config.Count; ++i) {
 					var profilefilename = String.Join ("_", new string [] { profile.ToString (), i.ToString () }) + ".mlpd";
@@ -140,8 +136,8 @@ public class Program
 
 					var process = Process.Start (info);
 
-					Task.Factory.StartNew (() => redirect (process.StandardOutput, Console.Out, "\t"), TaskCreationOptions.LongRunning);
-					Task.Factory.StartNew (() => redirect (process.StandardError, Console.Error, "\t"), TaskCreationOptions.LongRunning);
+					Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t"), TaskCreationOptions.LongRunning);
+					Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t"), TaskCreationOptions.LongRunning);
 
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
@@ -210,6 +206,12 @@ public class Program
 	{
 		var json = JObject.Parse (HttpClient.GetContent ("https://api.github.com/repos/mono/mono/commits/" + commit));
 		return DateTime.Parse ((string) json ["commit"] ["committer"] ["date"]);
+	}
+
+	static void Redirect (TextReader reader, TextWriter writer, string prefix = "") {
+		string line;
+		while ((line = reader.ReadLine ()) != null)
+			writer.WriteLine (prefix + line);
 	}
 
 	struct KeyValuePair
