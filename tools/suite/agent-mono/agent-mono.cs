@@ -98,9 +98,9 @@ public class Program
 				var info = new ProcessStartInfo {
 					FileName = Path.Combine (revisionfolder, "mono"),
 					WorkingDirectory = Path.Combine (testsdir,benchmark. TestDirectory),
-					UseShellExecute = false,
-					RedirectStandardOutput = true,
-					RedirectStandardError = true,
+//					UseShellExecute = false,
+//					RedirectStandardOutput = true,
+//					RedirectStandardError = true,
 				};
 
 				foreach (var env in config.MonoEnvironmentVariables) {
@@ -134,8 +134,8 @@ public class Program
 					var sw = Stopwatch.StartNew ();
 
 					var process = Process.Start (info);
-					var stdout = Task.Factory.StartNew (() => new StreamReader (process.StandardOutput.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
-					var stderr = Task.Factory.StartNew (() => new StreamReader (process.StandardError.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
+//					var stdout = Task.Factory.StartNew (() => new StreamReader (process.StandardOutput.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
+//					var stderr = Task.Factory.StartNew (() => new StreamReader (process.StandardError.BaseStream).ReadToEnd (), TaskCreationOptions.LongRunning);
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
 					sw.Stop ();
