@@ -121,7 +121,7 @@ public class Program
 				var profile = new ProfileResult { DateTime = DateTime.Now, Benchmark = benchmark, Config = config, Revision = revision, Timedout = timedout, Runs = new ProfileResult.Run [config.Count] };
 
 				for (var i = 0; i < config.Count; ++i) {
-					var profilefilename = String.Join ("_", new string [] { profile.ToString (), i.ToString () }) + ".mlpd";
+					var profilefilename = String.Join ("_", new string [] { ProfileFilename (profile), i.ToString () }) + ".mlpd";
 
 					info.Arguments = String.Format ("--profile=log:counters,countersonly,nocalls,noalloc,output={0} ", Path.Combine (
 						profilesfolder, profilefilename)) + arguments;
@@ -163,7 +163,7 @@ public class Program
 				run.Counters = ProfileResult.Run.ParseCounters (Path.Combine (profilesfolder, run.ProfilerOutput));
 			});
 
-			profile.StoreTo (Path.Combine (profilesfolder, profile.ToString () + ".json.gz"), true);
+			profile.StoreTo (Path.Combine (profilesfolder, ProfileFilename (profile) + ".json.gz"), true);
 		});
 
 		if (upload) {
@@ -195,10 +195,9 @@ public class Program
 		return DateTime.Parse ((string) json ["commit"] ["committer"] ["date"]);
 	}
 
-	static void Redirect (TextReader reader, TextWriter writer, string prefix = "") {
-		string line;
-		while ((line = reader.ReadLine ()) != null)
-			writer.WriteLine (prefix + line);
+	static string ProfileFilename (ProfileResult profile)
+	{
+		return String.Join ("_", new [] { profile.Benchmark.Name, profile.Config.Name });
 	}
 
 	struct KeyValuePair

@@ -123,11 +123,6 @@ namespace Benchmarker.Common.Models
 		{
 			return Project.GetHashCode () ^ Architecture.GetHashCode () ^ Commit.GetHashCode ();
 		}
-
-		public override string ToString ()
-		{
-			return String.Join ("_", new string [] { Project, Architecture, Commit });
-		}
 	}
 }
 

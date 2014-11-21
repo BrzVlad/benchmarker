@@ -32,18 +32,6 @@ namespace Benchmarker.Common.Models
 			}
 		}
 
-		public override string ToString ()
-		{
-			if (Benchmark == null)
-				throw new ArgumentNullException ("Benchmark");
-			if (Config == null)
-				throw new ArgumentNullException ("Config");
-			if (DateTime == default(DateTime))
-				throw new ArgumentNullException ("DateTime");
-
-			return String.Join ("_", new string [] { Benchmark.Name, Config.Name, Revision.ToString () });
-		}
-
 		public class Run {
 			public int Index { get; set; }
 			public TimeSpan WallClockTime { get; set; }
