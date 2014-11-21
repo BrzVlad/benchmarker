@@ -41,7 +41,7 @@ namespace Benchmarker.Common.Models
 			if (DateTime == default(DateTime))
 				throw new ArgumentNullException ("DateTime");
 
-			return String.Join ("_", new string [] { Benchmark.Name, Config.Name, DateTime.ToString ("s").Replace (':', '-') });
+			return String.Join ("_", new string [] { Benchmark.Name, Config.Name, Revision });
 		}
 
 		public class Run {
