@@ -197,7 +197,7 @@ public class Program
 
 	static string ProfileFilename (ProfileResult profile)
 	{
-		return String.Join ("_", new [] { profile.Benchmark.Name, profile.Config.Name });
+		return String.Join ("_", new [] { profile.Revision.Project, profile.Revision.Architecture, profile.Revision.Commit, profile.Benchmark.Name, profile.Config.Name });
 	}
 
 	struct KeyValuePair
