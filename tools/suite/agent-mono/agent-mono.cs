@@ -99,8 +99,8 @@ public class Program
 					FileName = Path.Combine (revisionfolder, "mono"),
 					WorkingDirectory = Path.Combine (testsdir,benchmark. TestDirectory),
 					UseShellExecute = false,
-					RedirectStandardOutput = true,
-					RedirectStandardError = true,
+//					RedirectStandardOutput = true,
+//					RedirectStandardError = true,
 				};
 
 				foreach (var env in config.MonoEnvironmentVariables) {
@@ -126,16 +126,13 @@ public class Program
 					info.Arguments = String.Format ("--profile=log:counters,countersonly,nocalls,noalloc,output={0} ", Path.Combine (
 						profilesfolder, profilefilename)) + arguments;
 
-					Console.Out.WriteLine ("\t$> {0} {1} {2}", envvar, info.FileName, info.Arguments);
+					Console.Out.WriteLine ("$> {0} {1} {2}", envvar, info.FileName, info.Arguments);
 
 					timeout = benchmark.Timeout > 0 ? benchmark.Timeout : timeout;
 
 					var sw = Stopwatch.StartNew ();
 
 					var process = Process.Start (info);
-
-					var stdout = Task.Factory.StartNew (() => Redirect (process.StandardOutput, Console.Out, "\t\t"), TaskCreationOptions.LongRunning);
-					var stderr = Task.Factory.StartNew (() => Redirect (process.StandardError, Console.Error, "\t\t"), TaskCreationOptions.LongRunning);
 
 					var success = process.WaitForExit (timeout < 0 ? -1 : (Math.Min (Int32.MaxValue / 1000, timeout) * 1000));
 
@@ -144,10 +141,7 @@ public class Program
 					if (!success)
 						process.Kill ();
 
-					stdout.Wait ();
-					stderr.Wait ();
-
-					Console.Out.WriteLine ("\t\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.Elapsed.ToString () : "timeout!");
+					Console.Out.WriteLine ("\t-> ({0}/{1}) {2}", i + 1, config.Count, success ? sw.Elapsed.ToString () : "timeout!");
 
 					profile.Runs [i] = new ProfileResult.Run {
 						Index = i,
