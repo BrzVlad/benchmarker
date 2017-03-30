@@ -1,6 +1,0 @@
-{
-  "Name": "ahcbench",
-  "TestDirectory": "zorn/ahcbench",
-  "AOTAssemblies": ["ahcbench.exe"],
-  "CommandLine": ["ahcbench.exe", "input3.cs"]
-}

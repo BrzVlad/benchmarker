@@ -1,6 +1,0 @@
-{
-  "Name": "scimark-sor",
-  "TestDirectory": "scimark",
-  "AOTAssemblies": ["scimark.exe"],
-  "CommandLine": ["scimark.exe", "SOR"]
-}

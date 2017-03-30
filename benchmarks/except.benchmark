@@ -1,6 +1,0 @@
-{
-  "Name": "except",
-  "TestDirectory": "shootout",
-  "AOTAssemblies": ["except.exe"],
-  "CommandLine": ["except.exe", "10000000"]
-}

@@ -1,6 +1,0 @@
-{
-  "Name": "gosharp-regexp",
-  "TestDirectory": "gosharp",
-  "AOTAssemblies": ["RegexpMatchHard_1K.exe"],
-  "CommandLine": ["RegexpMatchHard_1K.exe"]
-}

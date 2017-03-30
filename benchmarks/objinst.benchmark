@@ -1,6 +1,0 @@
-{
-  "Name": "objinst",
-  "TestDirectory": "shootout",
-  "AOTAssemblies": ["objinst.exe"],
-  "CommandLine": ["objinst.exe", "400000000"]
-}

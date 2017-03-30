@@ -1,6 +1,0 @@
-{
-  "Name": "grandetracer",
-  "TestDirectory": "csgrande/GrandeTracer/GrandeTracer/bin/Debug",
-  "AOTAssemblies": ["GrandeTracer.exe"],
-  "CommandLine": ["GrandeTracer.exe"]
-}
