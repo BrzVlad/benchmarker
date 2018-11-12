@@ -8,7 +8,7 @@ public class main {
     }
 
     public static int Main () {
-	fib (42);
+	fib (40);
 	//Console.WriteLine ("result: " + fib (42));
 	return 0;
     }

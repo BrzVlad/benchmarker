@@ -2,5 +2,5 @@
   "Name": "strcat",
   "TestDirectory": "shootout",
   "AOTAssemblies": ["strcat.exe"],
-  "CommandLine": ["strcat.exe", "80000000"]
+  "CommandLine": ["strcat.exe", "40000000"]
 }

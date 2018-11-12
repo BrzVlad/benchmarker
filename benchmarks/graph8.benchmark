@@ -1,6 +1,0 @@
-{
-  "Name": "graph8",
-  "TestDirectory": "graph",
-  "AOTAssemblies": ["graph8.exe"],
-  "CommandLine": ["graph8.exe"]
-}

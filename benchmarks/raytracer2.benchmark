@@ -2,5 +2,5 @@
   "Name": "raytracer2",
   "TestDirectory": "shootout",
   "AOTAssemblies": ["raytracer.csharp-2.exe"],
-  "CommandLine": ["raytracer.csharp-2.exe", "250"]
+  "CommandLine": ["raytracer.csharp-2.exe", "125"]
 }

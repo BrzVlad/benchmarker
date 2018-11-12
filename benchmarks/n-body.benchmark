@@ -2,5 +2,5 @@
   "Name": "n-body",
   "TestDirectory": "shootout",
   "AOTAssemblies": ["n-body.exe"],
-  "CommandLine": ["n-body.exe", "50000000"]
+  "CommandLine": ["n-body.exe", "1000000"]
 }

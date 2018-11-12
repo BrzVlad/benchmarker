@@ -2,5 +2,5 @@
   "Name": "lists",
   "TestDirectory": "shootout",
   "AOTAssemblies": ["lists.exe"],
-  "CommandLine": ["lists.exe", "30000"]
+  "CommandLine": ["lists.exe", "500"]
 }

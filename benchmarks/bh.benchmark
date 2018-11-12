@@ -2,5 +2,5 @@
   "Name": "bh",
   "TestDirectory": "csolden/BH/BH/bin/Debug",
   "AOTAssemblies": ["BH.exe"],
-  "CommandLine": ["BH.exe", "-b", "700", "-s", "1000"]
+  "CommandLine": ["BH.exe", "-b", "200", "-s", "300"]
 }

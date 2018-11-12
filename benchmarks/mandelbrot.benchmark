@@ -2,5 +2,5 @@
   "Name": "mandelbrot",
   "TestDirectory": "shootout",
   "AOTAssemblies": ["mandelbrot.exe"],
-  "CommandLine": ["mandelbrot.exe", "6400"]
+  "CommandLine": ["mandelbrot.exe", "3200"]
 }

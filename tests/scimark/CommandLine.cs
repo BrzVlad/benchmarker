@@ -13,7 +13,7 @@ namespace SciMark2
 			int N2 = 100;
 			int N3 = 1000;
 			int nz = 5000;
-			int N4 = 100;
+			int N4 = 50;
 			int index = 0;
 			while (index < args.Length)
 			{
